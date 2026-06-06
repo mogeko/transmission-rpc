@@ -26,7 +26,7 @@ swift test                          # Run tests
 ### Package Structure
 
 ```
-Package.swift                          # SPM manifest (swift-tools-version: 6.3)
+Package.swift                          # SPM manifest (swift-tools-version: 6.0)
 Sources/TransmissionRPC/               # Library source
   ├── Client.swift                     # Main RPC client (actor)
   ├── Types/
@@ -55,8 +55,7 @@ Tests/TransmissionRPCTests/            # Unit tests (requires Xcode)
 
 ### Dependencies
 
-- **`swift-argument-parser`** — For any CLI tooling
-- **`async-http-client`** or **`URLSession`** — For HTTP networking (prefer `URLSession` to minimize dependencies)
+- **No external dependencies** — Uses only `Foundation` and built-in `URLSession` for HTTP networking
 
 ## Code Style
 
