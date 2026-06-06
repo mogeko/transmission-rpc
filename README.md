@@ -1,12 +1,15 @@
 # transmission-rpc
 
 [![Build & Test](https://github.com/mogeko/transmission-rpc/actions/workflows/build+test.yml/badge.svg)](https://github.com/mogeko/transmission-rpc/actions/workflows/build+test.yml)
+[![Swift](https://img.shields.io/badge/Swift-5.9+-f05138?logo=swift)](https://swift.org)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-silver)](https://swiftpackageindex.com/mogeko/transmission-rpc)
+[![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A Swift library for the [Transmission RPC specification](https://github.com/transmission/transmission/blob/main/docs/rpc-spec.md). Provides Swift-native types and an `async/await`-based client to interact with Transmission BitTorrent clients via their JSON-RPC API.
 
 ## Requirements
 
-- Swift 6.0+
+- Swift 5.9+
 - macOS 14+ / iOS 17+ / tvOS 17+ / watchOS 10+
 - Transmission 4.1.0+ (`rpc_version_semver` 6.0.0)
 
@@ -16,15 +19,15 @@ Add `transmission-rpc` as a dependency in your `Package.swift`:
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/mogeko/transmission-rpc.git", branch: "master"),
+    .package(url: "https://github.com/mogeko/transmission-rpc.git", from: "0.1.0"),
 ],
 targets: [
-  .target(
-    name: "YourTarget",
-    dependencies: [
-      .product(name: "TransmissionRPC", package: "transmission-rpc"),
-    ]
-  ),
+    .target(
+        name: "YourTarget",
+        dependencies: [
+            .product(name: "TransmissionRPC", package: "transmission-rpc"),
+        ]
+    ),
 ]
 ```
 

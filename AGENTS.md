@@ -16,12 +16,17 @@ swift test                          # Run tests
 
 > **Note:** This project uses [swiftly](https://github.com/swiftlang/swiftly) to manage the Swift toolchain. Run `source ~/.swiftly/env.sh` before building/testing if the system Swift does not include the Testing framework.
 
+## CI
+
+- **GitHub Actions** (`.github/workflows/build+test.yml`) — runs `swift-format lint`, `swift test`, `swift build` on every push/PR
+- **Swift Package Index** (`.spi.yml`) — builds against Swift 6.0/6.3/6.4 on macOS, iOS, and Linux
+
 ## Architecture Conventions
 
 ### Package Structure
 
 ```
-Package.swift                          # SPM manifest (swift-tools-version: 5.7)
+Package.swift                          # SPM manifest (swift-tools-version: 6.3)
 Sources/TransmissionRPC/               # Library source
   ├── Client.swift                     # Main RPC client (actor)
   ├── Types/
