@@ -1,7 +1,7 @@
 # transmission-rpc
 
 [![Build & Test](https://github.com/mogeko/transmission-rpc/actions/workflows/build+test.yml/badge.svg)](https://github.com/mogeko/transmission-rpc/actions/workflows/build+test.yml)
-[![Swift](https://img.shields.io/badge/Swift-5.9+-f05138?logo=swift)](https://swift.org)
+[![Swift](https://img.shields.io/badge/Swift-6.0+-f05138?logo=swift)](https://swift.org)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS%20|%20iOS%20|%20tvOS%20|%20watchOS-silver)](https://swiftpackageindex.com/mogeko/transmission-rpc)
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -9,7 +9,7 @@ A Swift library for the [Transmission RPC specification](https://github.com/tran
 
 ## Requirements
 
-- Swift 5.9+
+- Swift 6.0+
 - macOS 14+ / iOS 17+ / tvOS 17+ / watchOS 10+
 - Transmission 4.1.0+ (`rpc_version_semver` 6.0.0)
 
