@@ -6,20 +6,12 @@ import PackageDescription
 let package = Package(
   name: "transmission-rpc",
   platforms: [
-    .macOS(.v14),
-    .iOS(.v17),
-    .tvOS(.v17),
-    .watchOS(.v10),
+    .macOS(.v14), .iOS(.v17), .tvOS(.v17), .watchOS(.v10),
   ],
   products: [
-    .library(
-      name: "TransmissionRPC",
-      targets: ["TransmissionRPC"]
-    )
+    .library(name: "TransmissionRPC", targets: ["TransmissionRPC"])
   ],
-  dependencies: [
-    .package(url: "https://github.com/apple/swift-testing.git", branch: "main")
-  ],
+  dependencies: [],
   targets: [
     .target(
       name: "TransmissionRPC",
@@ -28,10 +20,7 @@ let package = Package(
     ),
     .testTarget(
       name: "TransmissionRPCTests",
-      dependencies: [
-        "TransmissionRPC",
-        .product(name: "Testing", package: "swift-testing"),
-      ],
+      dependencies: ["TransmissionRPC"],
       path: "Tests/TransmissionRPCTests"
     ),
   ]
