@@ -9,9 +9,9 @@ A Swift library implementing the [Transmission RPC specification](https://github
 This project uses **Swift Package Manager** and the [Swift Testing](https://github.com/apple/swift-testing) framework.
 
 ```bash
-swift build          # Build the library
-swift test           # Run tests
-swift package format # Format source code (if swift-format is configured)
+swift format -i -r Sources/ Tests/  # Format source code (requires swift-format)
+swift build                         # Build the library
+swift test                          # Run tests
 ```
 
 > **Note:** This project uses [swiftly](https://github.com/swiftlang/swiftly) to manage the Swift toolchain. Run `source ~/.swiftly/env.sh` before building/testing if the system Swift does not include the Testing framework.

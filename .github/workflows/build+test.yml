@@ -1,0 +1,17 @@
+name: Build & Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.3
+      - uses: swift-actions/setup-swift@v3
+      - run: swift-format lint -r Sources Tests
+      - run: swift test
+      - run: swift build
