@@ -6,15 +6,15 @@ A Swift library implementing the [Transmission RPC specification](https://github
 
 ## Build & Test
 
-This project uses **Swift Package Manager**.
+This project uses **Swift Package Manager** and the [Swift Testing](https://github.com/apple/swift-testing) framework.
 
 ```bash
-swift build          # Build the library (works with Command Line Tools only)
-swift test           # Run tests (requires Xcode — XCTest is part of Xcode)
+swift build          # Build the library
+swift test           # Run tests
 swift package format # Format source code (if swift-format is configured)
 ```
 
-> **Note:** `swift test` requires Xcode to be installed. Command Line Tools alone do not include the XCTest framework.
+> **Note:** This project uses [swiftly](https://github.com/swiftlang/swiftly) to manage the Swift toolchain. Run `source ~/.swiftly/env.sh` before building/testing if the system Swift does not include the Testing framework.
 
 ## Architecture Conventions
 

@@ -37,14 +37,14 @@ struct RPCResult<Arguments: Decodable>: Decodable {
 // MARK: - JSON-RPC Error
 
 /// A JSON-RPC 2.0 error returned by the Transmission server.
-public struct RPCError: Decodable, Swift.Error {
+public struct RPCError: Decodable, Swift.Error, Sendable {
   public let code: Int
   public let message: String
   public let data: RPCErrorData?
 }
 
 /// Additional error data from the Transmission server.
-public struct RPCErrorData: Decodable {
+public struct RPCErrorData: Decodable, Sendable {
   public let errorString: String?
   enum CodingKeys: String, CodingKey {
     case errorString = "error_string"

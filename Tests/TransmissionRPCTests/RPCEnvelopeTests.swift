@@ -1,37 +1,40 @@
-import XCTest
+import Foundation
+import Testing
 
 @testable import TransmissionRPC
 
-final class RPCEnvelopeTests: XCTestCase {
+@Suite struct RPCEnvelopeTests {
 
   // MARK: - RPCRequest Encoding
 
-  func testEncodeRPCRequest_noParams() throws {
+  @Test func encodeRPCRequestNoParams() throws {
     let request = RPCRequest<String>(method: "session-close", params: nil, id: 1)
     let data = try JSONEncoder().encode(request)
     let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let dict = try #require(json)
 
-    XCTAssertEqual(json?["jsonrpc"] as? String, "2.0")
-    XCTAssertEqual(json?["method"] as? String, "session-close")
-    XCTAssertEqual(json?["id"] as? Int, 1)
-    XCTAssertNil(json?["params"])
+    #expect(dict["jsonrpc"] as? String == "2.0")
+    #expect(dict["method"] as? String == "session-close")
+    #expect(dict["id"] as? Int == 1)
+    #expect(dict["params"] == nil)
   }
 
-  func testEncodeRPCRequest_withParams() throws {
+  @Test func encodeRPCRequestWithParams() throws {
     let params = ["ids": [1, 2, 3]]
     let request = RPCRequest(method: "torrent-start", params: params, id: 2)
     let data = try JSONEncoder().encode(request)
     let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+    let dict = try #require(json)
 
-    XCTAssertEqual(json?["method"] as? String, "torrent-start")
-    XCTAssertEqual(json?["id"] as? Int, 2)
-    let decodedParams = json?["params"] as? [String: [Int]]
-    XCTAssertEqual(decodedParams?["ids"], [1, 2, 3])
+    #expect(dict["method"] as? String == "torrent-start")
+    #expect(dict["id"] as? Int == 2)
+    let decodedParams = dict["params"] as? [String: [Int]]
+    #expect(decodedParams?["ids"] == [1, 2, 3])
   }
 
   // MARK: - RPCResponse Decoding
 
-  func testDecodeSuccessResponse() throws {
+  @Test func decodeSuccessResponse() throws {
     let json = """
       {
           "jsonrpc": "2.0",
@@ -48,13 +51,13 @@ final class RPCEnvelopeTests: XCTestCase {
       RPCResponse<RPCResult<TorrentGetResponse>>.self, from: json
     )
 
-    XCTAssertEqual(response.result?.result, "success")
-    XCTAssertEqual(response.result?.tag, 1)
-    XCTAssertEqual(response.result?.arguments?.torrents?.count, 0)
-    XCTAssertNil(response.error)
+    #expect(response.result?.result == "success")
+    #expect(response.result?.tag == 1)
+    #expect(response.result?.arguments?.torrents?.count == 0)
+    #expect(response.error == nil)
   }
 
-  func testDecodeErrorResponse() throws {
+  @Test func decodeErrorResponse() throws {
     let json = """
       {
           "jsonrpc": "2.0",
@@ -71,9 +74,9 @@ final class RPCEnvelopeTests: XCTestCase {
       RPCResponse<RPCResult<TorrentGetResponse>>.self, from: json
     )
 
-    XCTAssertNil(response.result)
-    XCTAssertEqual(response.error?.code, 7)
-    XCTAssertEqual(response.error?.message, "HTTP error from backend service")
-    XCTAssertEqual(response.error?.data?.errorString, "Connection refused")
+    #expect(response.result == nil)
+    #expect(response.error?.code == 7)
+    #expect(response.error?.message == "HTTP error from backend service")
+    #expect(response.error?.data?.errorString == "Connection refused")
   }
 }

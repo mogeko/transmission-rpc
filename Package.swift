@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 6.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
   name: "transmission-rpc",
   platforms: [
-    .macOS(.v12),
-    .iOS(.v15),
-    .tvOS(.v15),
-    .watchOS(.v8),
+    .macOS(.v14),
+    .iOS(.v17),
+    .tvOS(.v17),
+    .watchOS(.v10),
   ],
   products: [
     .library(
@@ -17,7 +17,9 @@ let package = Package(
       targets: ["TransmissionRPC"]
     )
   ],
-  dependencies: [],
+  dependencies: [
+    .package(url: "https://github.com/apple/swift-testing.git", branch: "main")
+  ],
   targets: [
     .target(
       name: "TransmissionRPC",
@@ -26,7 +28,10 @@ let package = Package(
     ),
     .testTarget(
       name: "TransmissionRPCTests",
-      dependencies: ["TransmissionRPC"],
+      dependencies: [
+        "TransmissionRPC",
+        .product(name: "Testing", package: "swift-testing"),
+      ],
       path: "Tests/TransmissionRPCTests"
     ),
   ]

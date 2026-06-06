@@ -9,7 +9,7 @@ import Foundation
 /// - An array of integer IDs and/or hash strings
 /// - The string `"recently_active"`
 /// - Omitted (meaning "all torrents")
-public enum TorrentID: Codable, Sendable {
+public enum TorrentID: Codable, Sendable, Equatable {
   /// A single torrent by its numeric ID.
   case single(Int)
   /// Multiple torrents by ID or hash.
@@ -18,7 +18,7 @@ public enum TorrentID: Codable, Sendable {
   case recentlyActive
 
   /// An element in a torrent ID list, either a numeric ID or a hash string.
-  public enum Element: Codable, Sendable {
+  public enum Element: Codable, Sendable, Equatable {
     case id(Int)
     case hash(String)
 
