@@ -9,22 +9,36 @@ A Swift library implementing the [Transmission RPC specification](https://github
 This project uses **Swift Package Manager**.
 
 ```bash
-swift build          # Build the library
-swift test           # Run tests
+swift build          # Build the library (works with Command Line Tools only)
+swift test           # Run tests (requires Xcode — XCTest is part of Xcode)
 swift package format # Format source code (if swift-format is configured)
 ```
 
+> **Note:** `swift test` requires Xcode to be installed. Command Line Tools alone do not include the XCTest framework.
+
 ## Architecture Conventions
 
-### Package Structure (planned)
+### Package Structure
 
 ```
-Sources/Transmission-rpc/   # Library source
-  ├── Client.swift           # Main RPC client
-  ├── Types/                 # Request/response models
-  ├── Methods/               # RPC method implementations
-  └── Extensions/            # Convenience APIs
-Tests/Transmission-rpcTests/ # Unit tests
+Package.swift                          # SPM manifest (swift-tools-version: 5.7)
+Sources/TransmissionRPC/               # Library source
+  ├── Client.swift                     # Main RPC client (actor)
+  ├── Types/
+  │   ├── RPCEnvelope.swift            # JSON-RPC 2.0 request/response/error types
+  │   ├── CommonTypes.swift            # Shared types (TorrentID, File, Peer, etc.)
+  │   ├── TorrentAction.swift          # torrent-start/stop/verify/reannounce
+  │   ├── TorrentGet.swift             # torrent-get request/response (TorrentInfo ~80 fields)
+  │   ├── TorrentSet.swift             # torrent-set request (~25 fields)
+  │   ├── TorrentAdd.swift             # torrent-add request/response
+  │   ├── TorrentLocation.swift        # torrent-remove/set-location/rename-path
+  │   ├── Session.swift                # session-get/set types (~50 fields)
+  │   └── MiscMethods.swift            # session-stats, blocklist, port-test, queue, free-space, groups
+  └── Extensions/
+      └── Client+Convenience.swift     # High-level convenience APIs
+Tests/TransmissionRPCTests/            # Unit tests (requires Xcode)
+  ├── RPCEnvelopeTests.swift           # JSON-RPC envelope encoding/decoding
+  └── CodableTests.swift               # TorrentID, TorrentInfo, etc. encoding/decoding
 ```
 
 ### Key Principles
